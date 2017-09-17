@@ -1,5 +1,7 @@
 <?php
 
+namespace WyriHaximus\React\Http\Server\Middleware;
+
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use function React\Promise\resolve;
