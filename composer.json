@@ -1,0 +1,7 @@
+{
+    "name": "wyrihaximus/react-http-server-middleware-with-headers",
+    "require": {
+        "psr/http-message": "^1.0",
+        "react/promise": "^2.5"
+    }
+}
