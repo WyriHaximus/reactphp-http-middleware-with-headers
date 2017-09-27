@@ -12,7 +12,7 @@
 To install via [Composer](http://getcomposer.org/), use the command below, it will automatically detect the latest version and bind it with `^`.
 
 ```
-composer require WyriHaximus/react-http-middleware-with-headers
+composer require wyrihaximus/react-http-middleware-with-headers
 ```
 
 This middleware adds all the headers passed into the constructor to the responses flowing through this middleware.
