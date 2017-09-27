@@ -1,4 +1,4 @@
-# A static preloaded webroot middleware for react/http
+# Add headers to responses
 
 [![Build Status](https://travis-ci.org/WyriHaximus/reactphp-http-middleware-with-headers.svg?branch=master)](https://travis-ci.org/WyriHaximus/reactphp-http-middleware-with-headers)
 [![Latest Stable Version](https://poser.pugx.org/WyriHaximus/react-http-middleware-with-headers/v/stable.png)](https://packagist.org/packages/WyriHaximus/react-http-middleware-with-headers)
