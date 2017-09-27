@@ -1,6 +1,6 @@
 <?php
 
-namespace WyriHaximus\React\Http\Server\Middleware;
+namespace WyriHaximus\React\Http\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;

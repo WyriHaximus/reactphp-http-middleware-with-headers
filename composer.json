@@ -1,12 +1,12 @@
 {
-    "name": "wyrihaximus/react-http-server-middleware-with-headers",
+    "name": "wyrihaximus/react-http-middleware-with-headers",
     "require": {
         "psr/http-message": "^1.0",
         "react/promise": "^2.5"
     },
     "autoload": {
         "psr-4": {
-            "WyriHaximus\\React\\Http\\Server\\Middleware\\": "src/"
+            "WyriHaximus\\React\\Http\\Middleware\\": "src/"
         }
     }
 }
