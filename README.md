@@ -24,8 +24,16 @@ $server = new Server(new MiddlewareRunner([
     /** Other middleware */
     new WithHeadersMiddleware([
         'X-Powered-By' => 'wyrihaximus.net (11.0.33)',
-        'X-nanananana' => 'Batcache',
     ]),
+    new WithRandomHeadersMiddleware(
+        [
+            'X-nanananana' => 'Batcache',
+            'X-Horde' => 'For the Horde!',
+            'X-Picard' => 'Make it so',
+        ],
+        1, // Minimum header count to attach
+        2  // Maximum header count to attach
+    ),
     /** Other middleware */
 ]));
 ```
