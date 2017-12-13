@@ -20,7 +20,7 @@ This middleware adds all the headers passed into the constructor to the response
 # Usage
 
 ```php
-$server = new Server(new MiddlewareRunner([
+$server = new Server([
     /** Other middleware */
     new WithHeadersMiddleware([
         'X-Powered-By' => 'wyrihaximus.net (11.0.33)',
@@ -35,7 +35,7 @@ $server = new Server(new MiddlewareRunner([
         2  // Maximum header count to attach
     ),
     /** Other middleware */
-]));
+]);
 ```
 
 # License
