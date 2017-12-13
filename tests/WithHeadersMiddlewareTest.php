@@ -5,7 +5,7 @@ namespace WyriHaximus\React\Tests\Http\Middleware;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use React\EventLoop\Factory;
-use React\Http\ServerRequest;
+use React\Http\Io\ServerRequest;
 use RingCentral\Psr7\Response;
 use WyriHaximus\React\Http\Middleware\WithHeadersMiddleware;
 use function Clue\React\Block\await;
