@@ -377,22 +377,22 @@
         },
         {
             "name": "react/promise-timer",
-            "version": "v1.3.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise-timer.git",
-                "reference": "604513e33feb96ffb0dfb3d25233d3f9f0dce356"
+                "reference": "a11206938ca2394dc7bb368f5da25cd4533fa603"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise-timer/zipball/604513e33feb96ffb0dfb3d25233d3f9f0dce356",
-                "reference": "604513e33feb96ffb0dfb3d25233d3f9f0dce356",
+                "url": "https://api.github.com/repos/reactphp/promise-timer/zipball/a11206938ca2394dc7bb368f5da25cd4533fa603",
+                "reference": "a11206938ca2394dc7bb368f5da25cd4533fa603",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3",
                 "react/event-loop": "^1.0 || ^0.5 || ^0.4 || ^0.3.5",
-                "react/promise": "~2.1|~1.2"
+                "react/promise": "^2.7.0 || ^1.2.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.4 || ^5.7 || ^4.8.35"
@@ -417,7 +417,7 @@
                 }
             ],
             "description": "A trivial implementation of timeouts for Promises, built on top of ReactPHP.",
-            "homepage": "https://github.com/react/promise-timer",
+            "homepage": "https://github.com/reactphp/promise-timer",
             "keywords": [
                 "async",
                 "event-loop",
@@ -426,7 +426,7 @@
                 "timeout",
                 "timer"
             ],
-            "time": "2018-04-24T14:19:26+00:00"
+            "time": "2018-06-13T16:45:37+00:00"
         },
         {
             "name": "react/socket",
