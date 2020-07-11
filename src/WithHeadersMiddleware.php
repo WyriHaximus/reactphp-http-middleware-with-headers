@@ -1,31 +1,33 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace WyriHaximus\React\Http\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use React\Promise\PromiseInterface;
+
 use function React\Promise\resolve;
 
 final class WithHeadersMiddleware
 {
-    private $headers = [];
+    /** @var Header[] */
+    private array $headers;
 
-    /**
-     * @param array $headers
-     */
-    public function __construct(array $headers)
+    public function __construct(Header ...$headers)
     {
         $this->headers = $headers;
     }
 
-    public function __invoke(ServerRequestInterface $request, callable $next)
+    public function __invoke(ServerRequestInterface $request, callable $next): PromiseInterface
     {
-        return resolve($next($request))->then(function (ResponseInterface $response) {
-            foreach ($this->headers as $header => $value) {
-                $response = $response->withHeader($header, $value);
+        return resolve($next($request))->then(function (ResponseInterface $response): ResponseInterface {
+            foreach ($this->headers as $header) {
+                $response = $response->withHeader($header->name(), $header->contents());
             }
 
-            return resolve($response);
+            return $response;
         });
     }
 }

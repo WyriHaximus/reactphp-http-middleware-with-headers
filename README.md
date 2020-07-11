@@ -22,17 +22,15 @@ This middleware adds all the headers passed into the constructor to the response
 ```php
 $server = new Server([
     /** Other middleware */
-    new WithHeadersMiddleware([
+    new WithHeadersMiddleware(
         'X-Powered-By' => 'wyrihaximus.net (11.0.33)',
-    ]),
+    ),
     new WithRandomHeadersMiddleware(
-        [
-            'X-nanananana' => 'Batcache',
-            'X-Horde' => 'For the Horde!',
-            'X-Picard' => 'Make it so',
-        ],
         1, // Minimum header count to attach
-        2  // Maximum header count to attach
+        2,  // Maximum header count to attach
+        new Header('X-nanananana', 'Batcache'),
+        new Header('X-Horde', 'For the Horde!'),
+        new Header('X-Picard', 'Make it so'),
     ),
     /** Other middleware */
 ]);
