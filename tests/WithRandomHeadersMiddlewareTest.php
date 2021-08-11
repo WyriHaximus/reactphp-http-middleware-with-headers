@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace WyriHaximus\React\Tests\Http\Middleware;
 
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use React\EventLoop\Factory;
 use React\Http\Message\Response;
 use React\Http\Message\ServerRequest;
+use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
 use WyriHaximus\React\Http\Middleware\Header;
 use WyriHaximus\React\Http\Middleware\WithRandomHeadersMiddleware;
 
-use function Clue\React\Block\await;
-
-final class WithRandomHeadersMiddlewareTest extends TestCase
+final class WithRandomHeadersMiddlewareTest extends AsyncTestCase
 {
     public function testWithRandomHeaders(): void
     {
@@ -26,7 +23,7 @@ final class WithRandomHeadersMiddlewareTest extends TestCase
         ];
         $middleware         = new WithRandomHeadersMiddleware(...$headers);
         $request            = new ServerRequest('GET', 'https://example.com/');
-        $requestWithHeaders = await($middleware($request, static fn (ServerRequestInterface $request): ResponseInterface => new Response()), Factory::create());
+        $requestWithHeaders = $this->await($middleware($request, static fn (ServerRequestInterface $request): ResponseInterface => new Response()), 1);
 
         $count = 0;
 

@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace WyriHaximus\React\Tests\Http\Middleware;
 
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use React\EventLoop\Factory;
 use React\Http\Message\Response;
 use React\Http\Message\ServerRequest;
+use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
 use WyriHaximus\React\Http\Middleware\Header;
 use WyriHaximus\React\Http\Middleware\WithHeadersMiddleware;
 
-use function Clue\React\Block\await;
-
-final class WithHeadersMiddlewareTest extends TestCase
+final class WithHeadersMiddlewareTest extends AsyncTestCase
 {
     public function testWithHeaders(): void
     {
@@ -25,7 +22,7 @@ final class WithHeadersMiddlewareTest extends TestCase
         ];
         $request            = new ServerRequest('GET', 'https://example.com/');
         $middleware         = new WithHeadersMiddleware(...$headers);
-        $requestWithHeaders = await($middleware($request, static fn (ServerRequestInterface $request): ResponseInterface => new Response()), Factory::create());
+        $requestWithHeaders = $this->await($middleware($request, static fn (ServerRequestInterface $request): ResponseInterface => new Response()), 1);
 
         self::assertTrue($requestWithHeaders->hasHeader('X-Powered-By'));
         self::assertSame('ReactPHP 7', $requestWithHeaders->getHeaderLine('X-Powered-By'));
