@@ -16,7 +16,7 @@
         "wyrihaximus/constants": "^1.5"
     },
     "require-dev": {
-        "wyrihaximus/async-test-utilities": "^4.0"
+        "wyrihaximus/async-test-utilities": "^4.0 || ^8.0"
     },
     "config": {
         "platform": {
