@@ -8,27 +8,26 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use React\Promise\PromiseInterface;
 
-use function array_keys;
+use function array_values;
 use function count;
 use function random_int;
 use function React\Promise\resolve;
-
-use const WyriHaximus\Constants\Numeric\ONE;
-use const WyriHaximus\Constants\Numeric\TWO;
-use const WyriHaximus\Constants\Numeric\ZERO;
+use function Safe\shuffle;
 
 final class WithRandomHeadersMiddleware
 {
-    /** @var Header[] */
+    private const DEFAULT_MIN_MAX = 2;
+
+    /** @var array<Header> */
     private array $headers;
 
-    private int $minimum = TWO;
+    private int $minimum = self::DEFAULT_MIN_MAX;
 
-    private int $maximum = TWO;
+    private int $maximum = self::DEFAULT_MIN_MAX;
 
     public function __construct(Header ...$headers)
     {
-        $this->headers = $headers;
+        $this->headers = array_values($headers);
     }
 
     public function withMinimum(int $minimum): self
@@ -49,17 +48,22 @@ final class WithRandomHeadersMiddleware
         return $clone;
     }
 
+    /** @return PromiseInterface<ResponseInterface> */
     public function __invoke(ServerRequestInterface $request, callable $next): PromiseInterface
     {
         return resolve($next($request))->then(function (ResponseInterface $response): ResponseInterface {
             $count   = random_int($this->minimum, $this->maximum);
             $headers = $this->headers;
-            for ($i = ZERO; $i < $count; $i++) {
-                $randomizer = array_keys($headers);
-                $header     = $randomizer[random_int(ZERO, count($headers) - ONE)];
-                $response   = $response->withHeader($headers[$header]->name(), $headers[$header]->contents());
-                unset($headers[$header]);
-            }
+            shuffle($headers);
+            $i = 0;
+            do {
+                $header = $headers[$i];
+                if (! ($header instanceof Header)) {
+                    continue;
+                }
+
+                $response = $response->withHeader($header->header, $header->contents);
+            } while (++$i < $count);
 
             return $response;
         });

@@ -5,7 +5,6 @@
 [![Total Downloads](https://poser.pugx.org/WyriHaximus/react-http-middleware-with-headers/downloads.png)](https://packagist.org/packages/WyriHaximus/react-http-middleware-with-headers)
 [![Code Coverage](https://scrutinizer-ci.com/g/WyriHaximus/reactphp-http-middleware-with-headers/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/WyriHaximus/reactphp-http-middleware-with-headers/?branch=master)
 [![License](https://poser.pugx.org/WyriHaximus/react-http-middleware-with-headers/license.png)](https://packagist.org/packages/WyriHaximus/react-http-middleware-with-headers)
-[![PHP 7 ready](http://php7ready.timesplinter.ch/WyriHaximus/reactphp-http-middleware-with-headers/badge.svg)](https://travis-ci.org/WyriHaximus/reactphp-http-middleware-with-headers)
 
 # Install
 
@@ -20,7 +19,7 @@ This middleware adds all the headers passed into the constructor to the response
 # Usage
 
 ```php
-$server = new Server([
+$server = new \React\Http\HttpServer([
     /** Other middleware */
     new WithHeadersMiddleware(
         'X-Powered-By' => 'wyrihaximus.net (11.0.33)',
@@ -36,11 +35,30 @@ $server = new Server([
 ]);
 ```
 
+Combined with [`wyrihaximus-net/x-headers`](https://github.com/WyriHaximusNet/php-x-headers) you'll get an ever-growing
+set of Nerdy headers:
+
+```php
+$server = new \React\Http\HttpServer([
+    /** Other middleware */
+    new WithRandomHeadersMiddleware(
+        1,
+        ceil(count(Headers::HEADERS) / 4), // Add up to 25% of the list to it
+        ...(static function (array $headers): iterable {
+            foreach ($headers as $key => $value) {
+                yield new Header($key, $value);
+            }
+        })(Headers::HEADERS),
+    ),
+    /** Other middleware */
+]);
+```
+
 # License
 
 The MIT License (MIT)
 
-Copyright (c) 2017 Cees-Jan Kiewiet
+Copyright (c) 2024 Cees-Jan Kiewiet
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

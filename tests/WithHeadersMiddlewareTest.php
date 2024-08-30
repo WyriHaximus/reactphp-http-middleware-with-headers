@@ -12,6 +12,8 @@ use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
 use WyriHaximus\React\Http\Middleware\Header;
 use WyriHaximus\React\Http\Middleware\WithHeadersMiddleware;
 
+use function React\Async\await;
+
 final class WithHeadersMiddlewareTest extends AsyncTestCase
 {
     public function testWithHeaders(): void
@@ -22,7 +24,7 @@ final class WithHeadersMiddlewareTest extends AsyncTestCase
         ];
         $request            = new ServerRequest('GET', 'https://example.com/');
         $middleware         = new WithHeadersMiddleware(...$headers);
-        $requestWithHeaders = $this->await($middleware($request, static fn (ServerRequestInterface $request): ResponseInterface => new Response()), 1);
+        $requestWithHeaders = await($middleware($request, static fn (ServerRequestInterface $request): ResponseInterface => new Response()));
 
         self::assertTrue($requestWithHeaders->hasHeader('X-Powered-By'));
         self::assertSame('ReactPHP 7', $requestWithHeaders->getHeaderLine('X-Powered-By'));

@@ -12,7 +12,7 @@ use function React\Promise\resolve;
 
 final class WithHeadersMiddleware
 {
-    /** @var Header[] */
+    /** @var array<Header> */
     private array $headers;
 
     public function __construct(Header ...$headers)
@@ -20,11 +20,12 @@ final class WithHeadersMiddleware
         $this->headers = $headers;
     }
 
+    /** @return PromiseInterface<ResponseInterface> */
     public function __invoke(ServerRequestInterface $request, callable $next): PromiseInterface
     {
         return resolve($next($request))->then(function (ResponseInterface $response): ResponseInterface {
             foreach ($this->headers as $header) {
-                $response = $response->withHeader($header->name(), $header->contents());
+                $response = $response->withHeader($header->header, $header->contents);
             }
 
             return $response;
