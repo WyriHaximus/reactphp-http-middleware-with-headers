@@ -1,2 +1,4 @@
-examples/credentials.php
+var/*
+!var/.gitkeep
 vendor/
+etc/qa/.phpunit.cache
