@@ -8,7 +8,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use React\Promise\PromiseInterface;
 
-use function array_values;
 use function count;
 use function random_int;
 use function React\Promise\resolve;
@@ -27,7 +26,7 @@ final class WithRandomHeadersMiddleware
 
     public function __construct(Header ...$headers)
     {
-        $this->headers = array_values($headers);
+        $this->headers = $headers;
     }
 
     public function withMinimum(int $minimum): self
@@ -57,12 +56,11 @@ final class WithRandomHeadersMiddleware
             shuffle($headers);
             $i = 0;
             do {
-                $header = $headers[$i];
-                if (! ($header instanceof Header)) {
-                    continue;
-                }
-
-                $response = $response->withHeader($header->header, $header->contents);
+                /**
+                 * @psalm-suppress MixedPropertyFetch
+                 * @psalm-suppress MixedArgument
+                 */
+                $response = $response->withHeader($headers[$i]->header, $headers[$i]->contents);
             } while (++$i < $count);
 
             return $response;
