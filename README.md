@@ -19,7 +19,12 @@ This middleware adds all the headers passed into the constructor to the response
 # Usage
 
 ```php
-$server = new \React\Http\HttpServer([
+use React\Http\HttpServer;
+use WyriHaximus\React\Http\Middleware\Header;
+use WyriHaximus\React\Http\Middleware\WithHeadersMiddleware;
+use WyriHaximus\React\Http\Middleware\WithRandomHeadersMiddleware;
+
+$server = new HttpServer([
     /** Other middleware */
     new WithHeadersMiddleware(
         'X-Powered-By' => 'wyrihaximus.net (11.0.33)',
@@ -39,19 +44,27 @@ Combined with [`wyrihaximus-net/x-headers`](https://github.com/WyriHaximusNet/ph
 set of Nerdy headers:
 
 ```php
-$server = new \React\Http\HttpServer([
+use React\Http\HttpServer;
+use WyriHaximus\React\Http\Middleware\Headers;
+use WyriHaximus\React\Http\Middleware\WithRandomHeadersMiddleware;
+use WyriHaximusNet\XHeaders;
+
+$server = new HttpServer([
     /** Other middleware */
     new WithRandomHeadersMiddleware(
         1,
-        ceil(count(Headers::HEADERS) / 4), // Add up to 25% of the list to it
-        ...(static function (array $headers): iterable {
-            foreach ($headers as $key => $value) {
-                yield new Header($key, $value);
-            }
-        })(Headers::HEADERS),
+        ceil(count(XHeaders\Headers::HEADERS) / 4), // Add up to 25% of the list to it
+        ...Headers::fromIterable(XHeaders\Headers::HEADERS),
     ),
     /** Other middleware */
 ]);
+```
+
+This uses the `Headers` helper that can transform key value iterables like the following to an iterable with `Header` objects:
+```php
+[
+    'X-Header' => 'contents',
+]
 ```
 
 # License
