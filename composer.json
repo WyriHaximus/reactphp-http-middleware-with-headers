@@ -17,7 +17,7 @@
     },
     "require-dev": {
         "react/http": "^1.10",
-        "wyrihaximus/async-test-utilities": "^8.0.5"
+        "wyrihaximus/async-test-utilities": "^8.0.5 || ^9.0.0"
     },
     "suggest": {
         "wyrihaximus-net/x-headers": "Set of Nerdy headers I use in all my services for shits and giggles"
