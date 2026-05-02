@@ -10,7 +10,8 @@ use React\Promise\PromiseInterface;
 
 use function React\Promise\resolve;
 
-final class WithHeadersMiddleware
+/** @api */
+final readonly class WithHeadersMiddleware
 {
     /** @var array<Header> */
     private array $headers;
@@ -20,7 +21,11 @@ final class WithHeadersMiddleware
         $this->headers = $headers;
     }
 
-    /** @return PromiseInterface<ResponseInterface> */
+    /**
+     * @param (callable(ServerRequestInterface): (PromiseInterface<ResponseInterface>|ResponseInterface)) $next
+     *
+     * @return PromiseInterface<ResponseInterface>
+     */
     public function __invoke(ServerRequestInterface $request, callable $next): PromiseInterface
     {
         return resolve($next($request))->then(function (ResponseInterface $response): ResponseInterface {

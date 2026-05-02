@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WyriHaximus\React\Http\Middleware;
 
+/** @api */
 final readonly class Headers
 {
     /**

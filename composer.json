@@ -1,58 +1,59 @@
 {
-    "name": "wyrihaximus/react-http-middleware-with-headers",
-    "description": "react/http middleware to add headers to a response",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Cees-Jan Kiewiet",
-            "email": "ceesjank@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^8.2",
-        "ext-random": "^8.2",
-        "psr/http-message": "^1.1",
-        "react/promise": "^3",
-        "thecodingmachine/safe": "^2.5"
-    },
-    "require-dev": {
-        "react/http": "^1.10",
-        "wyrihaximus/async-test-utilities": "^8.0.5"
-    },
-    "suggest": {
-        "wyrihaximus-net/x-headers": "Set of Nerdy headers I use in all my services for shits and giggles"
-    },
-    "autoload": {
-        "psr-4": {
-            "WyriHaximus\\React\\Http\\Middleware\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "WyriHaximus\\React\\Tests\\Http\\Middleware\\": "tests/"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "ergebnis/composer-normalize": true,
-            "icanhazstring/composer-unused": true,
-            "infection/extension-installer": true,
-            "ocramius/package-versions": true
-        },
-        "platform": {
-            "php": "8.2.13"
-        },
-        "sort-packages": true
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "composer normalize",
-            "composer update --lock --no-scripts"
-        ],
-        "post-update-cmd": [
-            "composer normalize",
-            "composer update --lock --no-scripts"
-        ]
+  "name": "wyrihaximus/react-http-middleware-with-headers",
+  "description": "react/http middleware to add headers to a response",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cees-Jan Kiewiet",
+      "email": "ceesjank@gmail.com"
     }
+  ],
+  "require": {
+    "php": "^8.4",
+    "ext-random": "^8.2",
+    "psr/http-message": "^1.1.0",
+    "react/promise": "^3.3.0"
+  },
+  "require-dev": {
+    "react/http": "^1.10",
+    "wyrihaximus/async-test-utilities": "^12.2.0",
+    "wyrihaximus/makefiles": "^0.7.16"
+  },
+  "suggest": {
+    "wyrihaximus-net/x-headers": "Set of Nerdy headers I use in all my services for shits and giggles"
+  },
+  "autoload": {
+    "psr-4": {
+      "WyriHaximus\\React\\Http\\Middleware\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "WyriHaximus\\React\\Tests\\Http\\Middleware\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "ergebnis/composer-normalize": true,
+      "icanhazstring/composer-unused": true,
+      "infection/extension-installer": true,
+      "ocramius/package-versions": true,
+      "phpstan/extension-installer": true,
+      "wyrihaximus/makefiles": true,
+      "wyrihaximus/test-utilities": true
+    },
+    "platform": {
+      "php": "8.4.13"
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "make on-install-or-update || true"
+    ],
+    "post-update-cmd": [
+      "make on-install-or-update || true"
+    ]
+  }
 }

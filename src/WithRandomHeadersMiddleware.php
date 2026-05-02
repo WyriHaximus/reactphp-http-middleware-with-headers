@@ -13,9 +13,10 @@ use function random_int;
 use function React\Promise\resolve;
 use function Safe\shuffle;
 
+/** @api */
 final class WithRandomHeadersMiddleware
 {
-    private const DEFAULT_MIN_MAX = 2;
+    private const int DEFAULT_MIN_MAX = 2;
 
     /** @var array<Header> */
     private array $headers;
@@ -47,7 +48,11 @@ final class WithRandomHeadersMiddleware
         return $clone;
     }
 
-    /** @return PromiseInterface<ResponseInterface> */
+    /**
+     * @param (callable(ServerRequestInterface): (PromiseInterface<ResponseInterface>|ResponseInterface)) $next
+     *
+     * @return PromiseInterface<ResponseInterface>
+     */
     public function __invoke(ServerRequestInterface $request, callable $next): PromiseInterface
     {
         return resolve($next($request))->then(function (ResponseInterface $response): ResponseInterface {
@@ -59,6 +64,7 @@ final class WithRandomHeadersMiddleware
                 /**
                  * @psalm-suppress MixedPropertyFetch
                  * @psalm-suppress MixedArgument
+                 * @phpstan-ignore argument.type,argument.type,property.nonObject,property.nonObject
                  */
                 $response = $response->withHeader($headers[$i]->header, $headers[$i]->contents);
             } while (++$i < $count);
