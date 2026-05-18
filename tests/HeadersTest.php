@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace WyriHaximus\React\Tests\Http\Middleware;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use WyriHaximus\AsyncTestUtilities\AsyncTestCase;
 use WyriHaximus\React\Http\Middleware\Headers;
 
 final class HeadersTest extends AsyncTestCase
 {
-    /**
-     * @param iterable<string, string> $headers
-     *
-     * @test
-     * @dataProvider provideHeaderIterables
-     */
+    /** @param iterable<string, string> $headers */
+    #[Test]
+    #[DataProvider('provideHeaderIterables')]
     public function fromIterable(iterable $headers): void
     {
         $headerObjects = [...Headers::fromIterable($headers)];
