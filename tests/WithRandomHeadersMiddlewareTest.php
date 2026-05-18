@@ -48,7 +48,7 @@ final class WithRandomHeadersMiddlewareTest extends AsyncTestCase
             $requestHeaders[] = $headerName;
         }
 
-//        self::assertCount(count($headers), $requestHeaders);
+        self::assertCount(count($headers), $requestHeaders);
         self::assertNotSame(
             [
                 ...array_map(
@@ -104,7 +104,9 @@ final class WithRandomHeadersMiddlewareTest extends AsyncTestCase
     {
         $property = new ReflectionProperty(WithRandomHeadersMiddleware::class, $propertyName);
 
-        /** @phpstan-ignore-next-line */
-        return $property->getValue($middleware);
+        $value = $property->getValue($middleware);
+        self::assertIsInt($value);
+
+        return $value;
     }
 }
