@@ -11,7 +11,7 @@ use React\Promise\PromiseInterface;
 use function count;
 use function random_int;
 use function React\Promise\resolve;
-use function Safe\shuffle;
+use function shuffle;
 
 /** @api */
 final class WithRandomHeadersMiddleware
@@ -61,11 +61,6 @@ final class WithRandomHeadersMiddleware
             shuffle($headers);
             $i = 0;
             do {
-                /**
-                 * @psalm-suppress MixedPropertyFetch
-                 * @psalm-suppress MixedArgument
-                 * @phpstan-ignore argument.type,argument.type,property.nonObject,property.nonObject
-                 */
                 $response = $response->withHeader($headers[$i]->header, $headers[$i]->contents);
             } while (++$i < $count);
 
