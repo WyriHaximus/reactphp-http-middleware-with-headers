@@ -16,7 +16,7 @@
   },
   "require-dev": {
     "react/http": "^1.10",
-    "wyrihaximus/async-test-utilities": "^13.3.0",
+    "wyrihaximus/async-test-utilities": "^13.4.1",
     "wyrihaximus/makefiles": "^0.13.1"
   },
   "suggest": {
