@@ -19,5 +19,6 @@
         "@default": true,
         "GreaterThan": false,
         "GreaterThanOrEqualTo": false
-    }
+    },
+    "threads": 64
 }
