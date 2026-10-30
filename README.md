@@ -32,7 +32,7 @@ $server = new HttpServer([
     new WithRandomHeadersMiddleware(
         1, // Minimum header count to attach
         2,  // Maximum header count to attach
-        new Header('X-nanananana', 'Batcache'),
+        new Header('X-Batcache', 'Batcache'),
         new Header('X-Horde', 'For the Horde!'),
         new Header('X-Picard', 'Make it so'),
     ),
@@ -61,6 +61,7 @@ $server = new HttpServer([
 ```
 
 This uses the `Headers` helper that can transform key value iterables like the following to an iterable with `Header` objects:
+
 ```php
 [
     'X-Header' => 'contents',
