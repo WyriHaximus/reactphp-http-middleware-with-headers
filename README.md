@@ -61,6 +61,7 @@ $server = new HttpServer([
 ```
 
 This uses the `Headers` helper that can transform key value iterables like the following to an iterable with `Header` objects:
+
 ```php
 [
     'X-Header' => 'contents',
